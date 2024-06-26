@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- Import Asap font -->
+    <link href='https://fonts.googleapis.com/css?family=Asap' rel='stylesheet'>
+    <!-- Import Yeseva One font -->
+    <link href='https://fonts.googleapis.com/css?family=Yeseva+One' rel='stylesheet'>
+    <title>Progress Bar</title>
+    <!-- Add CSS code -->
+    <style>
+        /* apply background colour, font, font colour, to body */
+        body {
+            background-color: #130d0c;
+            color: #efefef;
+            font-family: Asap, sans-serif;
+            box-sizing: border-box;
+        }
+
+        /*change font for heading*/
+        h2 {
+            font-family: 'Yeseva One', serif;
+            font-weight: normal;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 25px;
+        }
+
+        .text {
+            word-wrap: break-word; /* wrapping for different size screens */
+            overflow-wrap: break-word;
+            white-space: normal;
+            margin-right: 20px; /* Add some margin to create space */
+        }
+
+        .progress-bar-container {
+            width: 530px;
+        }
+
+        .progress-bar {
+            position: relative;
+            width: 100%; /* Fill the container */
+            height: 30px;
+            border-radius: 30px;
+            background-color: white;
+        }
+
+        .progress-bar span {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            color: white;
+            line-height: 30px;
+            text-align: center;
+            border-radius: 30px;
+            background: linear-gradient(90deg, #b19a33 50%, #957316 100%);
+            transition: width .5s linear;
+        }
+
+        /* change text layout based on screen size */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .progress-bar-container {
+                width: 100%;
+                margin-top: 20px; /* Add some space when stacked */
+            }
+
+            .text {
+                margin-right: 0; /* Remove margin when stacked */
+            }
+        }
+
+        .date {
+            font-size: 12.5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="text">
+            <h2>Fundraiser Progress</h2>
+            <!-- Add spacing between Raised and Goal-->
+            <p>Raised: $1000&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Goal: $3000</p>
+            <p class="date">Last updated: 26/06/2024</p>
+        </div>
+
+        <div class="progress-bar-container">
+            <div class="progress-bar">
+                <span data-width="33%"></span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.addEventListener('load', () => {
+            const spans = document.querySelectorAll(".progress-bar span");
+
+            spans.forEach((span) => {
+                // Use a timeout to ensure the transition is triggered
+                setTimeout(() => {
+                    span.style.width = span.dataset.width;
+                    span.innerHTML = span.dataset.width;
+                }, 500);
+            });
+        });
+    </script>
+</body>
+
+</html>
