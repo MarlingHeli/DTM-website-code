@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Countdown Timer</title>
+    <!-- Import Asap font -->
+    <link href='https://fonts.googleapis.com/css?family=Asap' rel='stylesheet'>
+
+    <!-- Import confetti library-->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    <!-- Add CSS code -->
+    <style>
+        /* apply background colour, font, font colour, to body */
+        body {
+            color: #efefef;
+            font-family: Asap, sans-serif;
+            box-sizing: border-box;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            max-width: 550px;
+            margin: 0 auto;
+            padding: 25px
+        }
+
+        .text {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: normal;
+
+        }
+
+        .timer {
+            display: flex;
+            gap: 15px;
+            margin-top: -20px;
+        }
+
+        .timer div {
+            flex-basis: 80px;
+            text-align: left;
+        }
+
+        .timer span {
+            font-size: 23px;
+        }
+        /* change text layout based on screen size */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .timer {
+                justify-content: flex-start;
+                width: 100%;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="timer">
+            <div>
+                <p>Days</p>
+                <span id="days">00</span>
+                <span>:</span>
+            </div>
+            <div>
+                <p>Hours</p>
+                <span id="hours">00</span>
+                <span>:</span>
+            </div>
+            <div>
+                <p>Minutes</p>
+                <span id="minutes">00</span>
+                <span>:</span>
+            </div>
+            <div>
+                <p>Seconds</p>
+                <span id="seconds">00</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var countDownDate = new Date("July 10, 2024 19:30:00").getTime();
+
+        //make single digits have a 0 in front of them
+        function padWithZero(number) {
+            return number < 10 ? '0' + number : number;
+        }
+
+        //calculate time between now and set date
+        var x = setInterval(function () {
+            var now = new Date().getTime();
+            var distance = countDownDate - now;
+
+            //set timer as 00:00:00 when we reach the date.
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("days").innerHTML = "00";
+                document.getElementById("hours").innerHTML = "00";
+                document.getElementById("minutes").innerHTML = "00";
+                document.getElementById("seconds").innerHTML = "00";
+
+                //release confetti
+                confetti({
+                    particleCount: 250,
+                    spread: 110,
+                    origin: { y: 0.7 },
+                    ticks: 300,
+                });
+                return;
+            }
+
+            // Calculating time for day, hour, minute, and second
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Display the result
+            document.getElementById("days").innerHTML = padWithZero(days);
+            document.getElementById("hours").innerHTML = padWithZero(hours);
+            document.getElementById("minutes").innerHTML = padWithZero(minutes);
+            document.getElementById("seconds").innerHTML = padWithZero(seconds);
+
+        }, 1000);
+    </script>
+
+</body>
+
+</html>
