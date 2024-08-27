@@ -1,6 +1,8 @@
 This is HTML, CSS, and JavaScript code for a countdown timer and a progress bar. Made for DTM.
 
 Watch the supplied video if you want to customise the code.
+https://drive.google.com/file/d/1pR9Lo0NnaWNiIVs-KN3e_M4k3ApMU-AW/view?usp=sharing
+
 Useful font sites:
 https://www.w3schools.com/css/css_font_google.asp
 
